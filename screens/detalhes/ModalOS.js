@@ -12,7 +12,7 @@ import {
   ActivityIndicator
 } from "react-native";
 import openMap from "react-native-open-maps";
-import { createOpenLink } from "react-native-open-maps";
+
 
 
 
