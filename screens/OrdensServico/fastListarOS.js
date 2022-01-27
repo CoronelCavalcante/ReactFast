@@ -27,7 +27,6 @@ export default function fastListarOS({route , navigation} ) {
     headers: myHeaders,
     redirect: 'follow'
     };
-    console.log(OS.length)
     useEffect(() => {fetch("http://168.195.212.5:8000/OS/Abertas", requestOptions)
     .then(response => response.json())
     .then(result => setOS(result))
