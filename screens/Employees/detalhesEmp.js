@@ -87,7 +87,17 @@ export default function destalhesEmp({route , navigation}){
                         <Text>manager: {manager}</Text>
                         <Text>criado em: {route.params.obj.created_at}</Text>
                         <Button 
-                        onPress={()=> deletar()}
+                        onPress={()=> Alert.alert(
+                          "Deletar funcionario?",
+                          "Voce tocou no funcionario "+route.params.obj.email+" tem certeza que quer delta-lo?",                          
+                          [
+                              {text: "Cancelar", onPress:()=>console.log("CANCELADO"),
+                              style: "cancel"},
+                              {text: "Confirmar", onPress:()=>{deletar()}}
+                              
+                          ]
+
+                        )}
                         title="Deletar Funcionario"/>
 
                         <FlatList
