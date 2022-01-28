@@ -9,7 +9,8 @@ import {
   Button,
   TouchableOpacity,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from "react-native";
 
 
@@ -19,13 +20,21 @@ export default function destalhesEmp({route , navigation}){
   var manager = ''
   route.params.obj.manager == true ? (manager = 'Sim') : (manager = 'Nao');
  
-  function distribuir(){
-    if(route.params.token.manager == true){
-      return(<Button onPress={() => navigation.navigate('ModalEmpDist',{obj: route.params.obj, token: route.params.token })} title="Atribuir OS"/>)
-    }
-    else{
-      return ("Logado como funcionario")
-    }
+  function deletar(){
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer "+route.params.token.access_token);
+
+    var requestOptions = {
+      method: 'DELETE',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch("http://168.195.212.5:8000/users/"+route.params.obj.id, requestOptions)
+      .then(response => response.text())
+      .then(result => Alert.alert(result))
+      .then(navigation.goBack())
+      .catch(error => console.log('error', error));
   };
 
   const [isLoading, setLoading] = useState(true);
@@ -51,6 +60,7 @@ export default function destalhesEmp({route , navigation}){
           <View>
             <Text style={styles.cell}>   
               ID Ordem: {obj.ordem_servico.id}
+              {'\n'}
               Nome do cliente: {obj.cliente.razao}
               ordem aberta em: {obj.created_at}
               ordem dada por: {obj.givem_by}
@@ -76,6 +86,9 @@ export default function destalhesEmp({route , navigation}){
                         <Text>id: {route.params.obj.id}</Text>
                         <Text>manager: {manager}</Text>
                         <Text>criado em: {route.params.obj.created_at}</Text>
+                        <Button 
+                        onPress={()=> deletar()}
+                        title="Deletar Funcionario"/>
 
                         <FlatList
                         data={OS}

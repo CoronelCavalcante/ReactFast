@@ -39,7 +39,7 @@ export default function listaEmp({route , navigation} ) {
         var manager = ''
         obj.manager == true ? (manager = 'Sim') : (manager = 'Nao');
         return(          
-          <TouchableOpacity onPress={() => navigation.navigate('destalhesEmp',{obj: obj, token: route.params.token })}>
+          <TouchableOpacity onPress={() => navigation.navigate('detalhesEmp',{obj: obj, token: route.params.token })}>
             <Text style={styles.cell}>   
               <Text style={{fontWeight: 'bold'}}>ID no banco </Text> {obj.id}
               {'\n'}

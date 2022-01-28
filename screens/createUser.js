@@ -9,6 +9,7 @@ import {
   Button,
   Switch,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 //METODOS POST PRA HTTP NAO FUNCIONAO NO ANDROID ATUALIZADO. VER SE RESOLVO OU SE ESPERO TER UM HTTPS.
@@ -41,7 +42,7 @@ export default function createUser( {route , navigation}) {
 
         fetch("http://168.195.212.5:8000/users", requestOptions)
           .then(response => response.text())
-          .then(result => console.log(result))
+          .then(result => Alert.alert(result))
           .catch(error => console.log('error', error));
     }
     
